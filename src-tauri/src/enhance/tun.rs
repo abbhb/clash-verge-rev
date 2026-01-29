@@ -57,19 +57,18 @@ pub fn use_tun(mut config: Mapping, enable: bool) -> Mapping {
                 revise!(dns_val, "fake-ip-range", "198.18.0.1/16");
             }
 
-            #[cfg(target_os = "macos")]
-            {
-                AsyncHandler::spawn(move || async move {
-                    crate::utils::resolve::dns::restore_public_dns().await;
-                    crate::utils::resolve::dns::set_public_dns("223.6.6.6".to_string()).await;
-                });
-            }
+            // Note: System DNS modification is not needed when TUN mode is enabled
+            // because TUN's dns-hijack configuration (any:53) already intercepts
+            // all DNS queries at the network layer, regardless of system DNS settings.
+            // Clash handles DNS resolution internally via its own DNS configuration.
         }
 
         // 当TUN启用时，将修改后的DNS配置写回
         revise!(config, "dns", dns_val);
     } else {
-        // TUN未启用时，仅恢复系统DNS，不修改配置文件中的DNS设置
+        // When TUN is disabled, restore system DNS if it was previously modified
+        // Note: This is kept for backward compatibility to restore DNS settings
+        // that may have been modified by older versions of this application.
         #[cfg(target_os = "macos")]
         AsyncHandler::spawn(move || async move {
             crate::utils::resolve::dns::restore_public_dns().await;
