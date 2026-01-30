@@ -155,6 +155,8 @@ jobs:
             target: x86_64-unknown-linux-gnu
 
     runs-on: ${{ matrix.os }}
+    env:
+      APPLE_CERT_EXISTS: ${{ secrets.APPLE_CERTIFICATE != '' }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
@@ -217,7 +219,7 @@ jobs:
           echo "Rust target ${{ matrix.target }} installed."
 
       - name: Tauri build (with code signing)
-        if: matrix.os == 'macos-latest' && secrets.APPLE_CERTIFICATE != ''
+        if: ${{ matrix.os == 'macos-latest' && env.APPLE_CERT_EXISTS == 'true' }}
         # 上游 5.24 修改了 latest.json 的生成逻辑，且依赖 tauri-plugin-update 2.10.0 暂未发布，故锁定在 0.5.23 版本
         uses: tauri-apps/tauri-action@v0.6.1
         env:
@@ -242,7 +244,7 @@ jobs:
           includeUpdaterJson: true
 
       - name: Tauri build (without code signing)
-        if: matrix.os != 'macos-latest' || secrets.APPLE_CERTIFICATE == ''
+        if: ${{ matrix.os != 'macos-latest' || env.APPLE_CERT_EXISTS != 'true' }}
         # 上游 5.24 修改了 latest.json 的生成逻辑，且依赖 tauri-plugin-update 2.10.0 暂未发布，故锁定在 0.5.23 版本
         uses: tauri-apps/tauri-action@v0.6.1
         env:
