@@ -134,7 +134,7 @@ jobs:
           echo "Rust target ${{ matrix.target }} installed."
 
       - name: Tauri build (with code signing)
-        if: github.event.inputs[matrix.input] == 'true' && matrix.os == 'macos-latest' && secrets.APPLE_CERTIFICATE != ''
+        if: github.event.inputs[matrix.input] == 'true' && matrix.os == 'macos-latest' && secrets.APPLE_CERTIFICATE
         uses: tauri-apps/tauri-action@v0
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
@@ -152,7 +152,7 @@ jobs:
           args: --target ${{ matrix.target }} -b ${{ matrix.bundle }}
 
       - name: Tauri build (without code signing)
-        if: github.event.inputs[matrix.input] == 'true' && (matrix.os != 'macos-latest' || secrets.APPLE_CERTIFICATE == '')
+        if: github.event.inputs[matrix.input] == 'true' && (matrix.os != 'macos-latest' || !secrets.APPLE_CERTIFICATE)
         uses: tauri-apps/tauri-action@v0
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
