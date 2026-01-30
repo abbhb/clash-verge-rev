@@ -1,5 +1,7 @@
 # macOS Build Environment Variables Configuration Guide
 
+> **Quick Reference:** For a quick overview of required environment variables, see the [Quick Reference Guide](./BUILD_ENV_MACOS_QUICK_REF.md)
+
 This document provides detailed instructions on configuring all required environment variables (Secrets) for macOS builds in GitHub Actions and how to obtain their values.
 
 ## Overview

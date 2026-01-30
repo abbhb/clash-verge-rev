@@ -1,5 +1,7 @@
 # macOS 构建所需的 GitHub 环境变量配置指南
 
+> **快速参考：** 如果你需要快速查看所需的环境变量列表，请参阅 [快速参考指南](./BUILD_ENV_MACOS_QUICK_REF.md)
+
 本文档详细说明了在 GitHub Actions 中进行 macOS 构建时需要配置的所有环境变量（Secrets），以及如何获取这些变量的值。
 
 ## 概述
