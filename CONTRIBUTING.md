@@ -85,6 +85,17 @@ Fast build for testing:
 pnpm build:fast
 ```
 
+#### Building on macOS without Code Signing
+
+If you're building on macOS for local debugging and don't have Apple developer certificates, the build will automatically skip code signing. The resulting `.app` and `.dmg` files will not be signed, but they can still be used for local testing.
+
+**Note:** Unsigned macOS builds cannot be distributed to others and may trigger security warnings. For distribution, you need to:
+1. Enroll in the Apple Developer Program
+2. Create development certificates
+3. Set up the required environment variables or GitHub secrets with your certificates
+
+The GitHub Actions workflows automatically detect if Apple certificates are available and skip signing if they're not present.
+
 ### Clean Build
 
 ```bash
