@@ -97,6 +97,15 @@ pnpm clean
 pnpm portable
 ```
 
+## GitHub Actions Setup
+
+If you're setting up CI/CD workflows for macOS builds, you'll need to configure several environment variables in your GitHub repository settings. See our detailed guides:
+
+- [macOS 构建环境变量配置指南](docs/BUILD_ENV_MACOS.md) (中文)
+- [macOS Build Environment Variables Guide](docs/BUILD_ENV_MACOS_EN.md) (English)
+
+These guides cover all required Apple Developer certificates, signing identities, and Tauri signing keys needed for automated builds.
+
 ## Contributing Your Changes
 
 ### Before Committing

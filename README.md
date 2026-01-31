@@ -96,6 +96,12 @@ pnpm run prebuild
 pnpm dev
 ```
 
+### Build Configuration
+
+If you need to set up GitHub Actions for macOS builds, see:
+- [macOS 构建环境变量配置指南](./docs/BUILD_ENV_MACOS.md) (中文)
+- [macOS Build Environment Variables Guide](./docs/BUILD_ENV_MACOS_EN.md) (English)
+
 ## Contributions
 
 Issue and PR welcome!
